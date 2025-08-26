@@ -1,7 +1,9 @@
 {
   "name": "antd-react-plus-ui",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "基于 React 和 Ant Design 的组件库",
+  "author": "Xuwei",
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -9,6 +11,10 @@
   "files": [
     "dist"
   ],
+  "gitRepository": {
+    "type": "git",
+    "url": "https://github.com/fucktic/antd-react-plus.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
