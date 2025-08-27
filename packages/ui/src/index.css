@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* 基础样式重置 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 68px;
+  font-size: 14px;
+}
+

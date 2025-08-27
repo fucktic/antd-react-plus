@@ -1,0 +1,38 @@
+
+
+
+.secondary-cascader-wrapper {
+    --header-bg-color: var(--bg-color);
+    --header-height: 40px;
+    --content-padding: 0 16px;
+    --border-radius:4px;
+    --border-color:#d9d9d9;
+    --mini-height:400px;
+    --mini-width:600px;
+    
+    min-height: var(--mini-height);
+    min-width: var(--mini-width);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    & .header{
+        background-color: var(--header-bg-color);
+    }
+    & .body>div{
+        @apply h-full relative overflow-hidden;
+    }
+    & .header>div,.body>div{
+        padding: var(--content-padding);
+        border-right: 1px solid var(--border-color);
+        &:last-child{
+            border-right: none;
+        }
+    }
+    & .header>div{
+        height: var(--header-height);       
+        display: flex;
+        align-items: center;      
+        border-bottom: 1px solid var(--border-color);        
+    }
+
+}

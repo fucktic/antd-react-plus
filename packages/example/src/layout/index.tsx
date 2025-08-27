@@ -1,5 +1,7 @@
 import React from 'react'
-import { Header, SideMenu, ContentWrapper } from './App'
+import { Header } from './Header'
+import { SideMenu } from './SideMenu'
+import { ContentWrapper } from './ContentWrapper'
 
 interface LayoutProps {
   children: React.ReactNode

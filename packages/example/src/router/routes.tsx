@@ -1,18 +1,19 @@
 import { ReactNode } from 'react'
 import Home from '../pages/Home'
-import ButtonPage from '../pages/ButtonPage'
-import CardPage from '../pages/CardPage'
-import InputPage from '../pages/InputPage'
+import Changelog from '../pages/Changelog';
+import CascaderSecondaryPage from '../pages/CascaderSecondaryPage';
 
 // 路由配置项类型定义
 export interface RouteConfig {
   path: string;
-  element: ReactNode;
+  element?: ReactNode;
+  component?: React.LazyExoticComponent<any>;
   name?: string;
   key?: string;
   icon?: string;
   children?: RouteConfig[];
   hidden?: boolean;
+  type?: string
 }
 
 // 路由配置数组
@@ -20,39 +21,28 @@ export const routeConfig: RouteConfig[] = [
   {
     path: '/',
     element: <Home />,
-    name: '首页',
+    name: '概览',
     key: 'home'
   },
   {
-    path: '/components',
-    name: '组件',
-    key: 'components',
-    children: [
-      {
-        path: 'button',
-        element: <ButtonPage />,
-        name: '按钮 Button',
-        key: 'button'
-      },
-      {
-        path: 'card',
-        element: <CardPage />,
-        name: '卡片 Card',
-        key: 'card'
-      },
-      {
-        path: 'input',
-        element: <InputPage />,
-        name: '输入框 Input',
-        key: 'input'
-      }
-    ]
+    path: '/changelog',
+    name: '更新日志',
+    key: 'changelog',
+    element: <Changelog />
   },
   {
-    path: '/guide',
-    name: '使用指南',
-    key: 'guide',
-    element: <div className="p-8 text-center text-xl"> 使用指南页面正在建设中...</div>
+    path: '/components',
+    key: 'components',
+    type: 'group',
+    name: '组件',
+    children: [
+      {
+        path: 'cascader-secondary',
+        element: <CascaderSecondaryPage />,
+        name: '二级级联选择器 CascaderSecondary',
+        key: 'cascader-secondary'
+      }
+    ]
   }
 ]
 
@@ -94,15 +84,36 @@ export const generateRoutes = (routes: RouteConfig[], parentPath = ''): RouteCon
     }
   });
 
+
   return result;
 }
 
-// 生成菜单配置
-export const generateMenuItems = (routes: RouteConfig[]): RouteConfig[] => {
+// 生成菜单配置 - 添加父路径参数以支持路径拼接
+export const generateMenuItems = (routes: RouteConfig[], parentPath = ''): RouteConfig[] => {
   return routes
     .filter(route => !route.hidden)
-    .map(route => ({
-      ...route,
-      children: route.children ? generateMenuItems(route.children) : undefined
-    }));
+    .map(route => {
+      // 处理路径拼接，避免重复斜杠
+      let fullPath = '';
+      if (parentPath && parentPath !== '/') {
+        // 如果父路径不是根路径，且子路径不以/开头，则添加斜杠连接
+        if (route.path.startsWith('/')) {
+          fullPath = route.path;
+        } else {
+          fullPath = `${parentPath}/${route.path}`;
+        }
+      } else {
+        // 根路径情况
+        fullPath = route.path;
+      }
+
+      // 确保路径格式正确（移除多余的斜杠）
+      fullPath = fullPath.replace(/\/+/g, '/');
+
+      return {
+        ...route,
+        path: fullPath, // 替换为完整路径
+        children: route.children ? generateMenuItems(route.children, fullPath) : undefined
+      };
+    });
 }
