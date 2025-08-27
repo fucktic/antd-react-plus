@@ -4,8 +4,9 @@
   "description": "基于 React 和 Ant Design 的组件库及示例项目",
   "private": true,
   "scripts": {
-    "dev": "pnpm -F example dev",
-    "build": "pnpm -F ui build && pnpm -F example build",
+    "dev": "cd packages/example && pnpm dev",
+    "build": "cd packages/ui && pnpm build && cd ../example && pnpm build",
+    "deploy": "gh-pages -d packages/example/dist",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."
   },
