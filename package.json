@@ -1,6 +1,6 @@
 {
   "name": "antd-react-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于 React 和 Ant Design 的组件库及示例项目",
   "private": true,
   "scripts": {
