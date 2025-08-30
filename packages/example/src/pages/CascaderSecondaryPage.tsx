@@ -5,10 +5,6 @@ import { CascaderSecondary } from 'antd-react-plus-ui';
 const { Title, Paragraph } = Typography;
 
 const CascaderSecondaryPage: React.FC = () => {
-  const handleSelectChange = (selectedAccounts: any[]) => {
-    console.log('已选择的账户:', selectedAccounts);
-  };
-
   return (
     <div className="p-6">
       <Title level={2}>二级级联选择器组件</Title>
@@ -25,6 +21,13 @@ const CascaderSecondaryPage: React.FC = () => {
               title: '授权账户',
               customTitle: '推广账户',
               selectedTitle: '已选',
+
+            }
+          }
+          selected={
+            {
+              list: [],
+              max: 10
             }
           }
         />

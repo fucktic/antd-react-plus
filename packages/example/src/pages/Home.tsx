@@ -1,6 +1,3 @@
-import { Button } from 'antd-react-plus-ui'
-import { Link } from 'react-router-dom'
-
 const Home = () => {
   return (
     <div className="max-w-3xl mx-auto text-center">

@@ -1,6 +1,7 @@
-import { Button } from "antd";
+import { Button, Empty } from "antd";
 import { theme } from "antd";
 import './index.css'
+import { useState } from "react";
 type TypeHeader = {
   title: string;
   customTitle: string;
@@ -15,7 +16,7 @@ export type HeaderProps = {
 }
 export type CascaderSecondaryProps = {
   className?: string,
-  styles?: React.CSSProperties,
+  style?: React.CSSProperties,
   header: TypeHeader,
   //选中项
   selected: {
@@ -31,22 +32,26 @@ export type CascaderSecondaryProps = {
  * @returns 
  */
 export const CascaderSecondary = (props: CascaderSecondaryProps) => {
-  const { styles, className } = props
+  const { style, className } = props
   const { token } = theme.useToken()
-  const style = {
+  const mergedStyle = {
     ['--bg-color' as any]: token.colorBgLayout,
-    ...styles,
+    ...style,
   }
   const { header, selected: { list, max = 500 } } = props
-
+  const selecteds = {
+    count: list.length,
+    max
+  }
   return (
-    <div className={`w-full flex flex-col rounded-sm  secondary-cascader-wrapper ${className}`} style={style}>
+    <div className={`w-full flex flex-col rounded-sm secondary-cascader-wrapper ${className}`} style={mergedStyle}>
 
-      <Header header={header} selected={{ count: list.length, max }} />
+      <Header header={header} selected={selecteds} />
       <div className="flex-1 grid grid-cols-3 body">
-        <div className="col-span-2">1</div>
+        <div className="col-span-2">
+          <CascaderSecondaryPanel selected={selecteds} />
+        </div>
         <div className="h-full relative overflow-hidden"></div>
-
       </div>
     </div>
   )
@@ -70,9 +75,25 @@ const Header = (props: HeaderProps) => {
   )
 }
 
-// const panelProps = {}
-export const CascaderSecondaryPanel = () => {
-  return (
-    <div className="w-full h-full "></div>
-  )
+type PanelProps = {
+  selected: {
+    count: number;
+    max: number;
+  }
+}
+export const CascaderSecondaryPanel = (props: PanelProps) => {
+  //一级列表
+  const [firstList, setFirstList] = useState([])
+  //二级列表
+  const [secondList, setSecondList] = useState([])
+
+
+
+  return <div className="h-full w-full">{!firstList.length ? (<div className="h-full flex items-center justify-center"><Empty /></div>) : (
+    <div className="h-full w-full relative">
+
+    </div>
+  )}
+  </div>
+
 }

@@ -12,12 +12,20 @@ export default defineConfig({
       insertTypesEntry: true,
     })
   ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
+    },
+  },
   build: {
     lib: {
       entry: 'src/index.ts',
       name: 'AntdReactPlus',
       fileName: 'index',
     },
+    cssCodeSplit: false,
     rollupOptions: {
       // 排除外部依赖，避免打包到组件库中
       external: ['react', 'react-dom', 'antd'],
@@ -27,7 +35,8 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
           antd: 'antd'
-        }
+        },
+
       }
     }
   }

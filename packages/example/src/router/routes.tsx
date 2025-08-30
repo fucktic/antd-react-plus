@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import Home from '../pages/Home'
 import Changelog from '../pages/Changelog';
 import CascaderSecondaryPage from '../pages/CascaderSecondaryPage';
+import ScrollbarPage from '../pages/ScrollbarPage';
 
 // 路由配置项类型定义
 export interface RouteConfig {
@@ -41,6 +42,12 @@ export const routeConfig: RouteConfig[] = [
         element: <CascaderSecondaryPage />,
         name: '二级级联选择器 CascaderSecondary',
         key: 'cascader-secondary'
+      },
+      {
+        path: 'scrollbar',
+        element: <ScrollbarPage />,
+        name: '自定义滚动条 Scrollbar',
+        key: 'scrollbar'
       }
     ]
   }

@@ -1,0 +1,101 @@
+/* 滚动条基础样式 */
+.scrollbar-wrapper {
+    /*** 滚动条宽度*/
+    --track-height: 15px;
+    /*** 滚动条高度*/
+    --track-width: 15px;
+    --track-bg-color:#f7f8fa;
+    --track-border-color:#e5e6eb; 
+    /*** 滚动条滑块宽度*/
+    --thumb-width: 9px;
+    /*** 滚动条滑块高度*/
+    --thumb-height: 9px;
+    /*** 滚动条滑块背景颜色*/
+    --thumb-bg-color:#c9cdd4;
+    /*** 滚动条滑块背景颜色*/
+    --thumb-bg-color-hover:#a0a3ab;
+}
+
+.scrollbar-wrapper-container {
+    position: relative;
+    scrollbar-width: none;
+}
+.scrollbar-wrapper-container::-webkit-scrollbar{
+  display: none;
+}
+.scrollbar-wrapper-track {
+  @apply absolute z-100; 
+  
+}
+.scrollbar-wrapper-thumb{
+  @apply absolute inline-block;
+}
+.scrollbar-wrapper-thumb-bar{
+  @apply w-full h-full;
+  border-radius: 6px;
+  background-color: var(--thumb-bg-color);
+}
+.scrollbar-wrapper-track-direction-horizontal{
+  bottom: 0;
+  left:0;
+  width: 100%;
+  height: var(--track-height);
+}
+.scrollbar-wrapper.scrollbar-wrapper-type-track .scrollbar-wrapper-track {
+  background-color: var(--track-bg-color);
+}
+/*scrollbar-wrapper-track-direction-vertical*/
+.scrollbar-wrapper.scrollbar-wrapper-type-track .scrollbar-wrapper-track-direction-horizontal { 
+  border-top:1px solid var(--track-border-color);
+  border-bottom:1px solid var(--track-border-color);
+}
+
+.scrollbar-wrapper.scrollbar-wrapper-type-track .scrollbar-wrapper-thumb-direction-horizontal,
+.scrollbar-wrapper.scrollbar-wrapper-type-track .scrollbar-wrapper-thumb-direction-vertical {
+  margin: -1px 0;
+}
+
+.scrollbar-wrapper-thumb-direction-horizontal .scrollbar-wrapper-thumb-bar {
+  @apply h-[var(--thumb-height)] my-[3px];
+}
+
+.scrollbar-wrapper-track-direction-vertical{
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: var(--track-width);
+}
+
+.scrollbar-wrapper.scrollbar-wrapper-type-track .scrollbar-wrapper-track-direction-vertical {
+  border-right:1px solid var(--track-border-color);
+  border-left:1px solid var(--track-border-color);
+}
+.scrollbar-wrapper .scrollbar-wrapper-type-track .scrollbar-wrapper-track-direction-vertical::after {
+    position:  absolute;
+    right: -1px;
+    top: 0;
+    display: block;
+    box-sizing: border-box;
+    width: 15px;
+    height: 15px;
+    background-color: var(--track-bg-color);
+    border-right: 1px solid var(--track-border-color);
+    border-bottom: 1px solid var(--track-border-color);
+    content: "";
+}
+.scrollbar-wrapper-thumb-direction-vertical .scrollbar-wrapper-thumb-bar { 
+  @apply w-[var(--thumb-width)] mx-[3px];
+}
+
+
+.scrollbar-wrapper.scrollbar-wrapper-type-embed .scrollbar-wrapper-thumb{
+  opacity: 0;
+  transition: opacity ease 0.2s ;
+}
+
+.scrollbar-wrapper.scrollbar-wrapper-type-embed .scrollbar-wrapper-thumb-dragging,
+.scrollbar-wrapper.scrollbar-wrapper-type-embed:hover .scrollbar-wrapper-thumb{
+  opacity: 0.8;
+}
+
+

@@ -8,10 +8,11 @@
     --border-radius:4px;
     --border-color:#d9d9d9;
     --mini-height:400px;
-    --mini-width:600px;
+    --max-width: 100%;
     
     min-height: var(--mini-height);
-    min-width: var(--mini-width);
+    max-width: var(--max-width);
+    width: 100%;
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
     overflow: hidden;
@@ -27,6 +28,9 @@
         &:last-child{
             border-right: none;
         }
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     & .header>div{
         height: var(--header-height);       
@@ -35,4 +39,17 @@
         border-bottom: 1px solid var(--border-color);        
     }
 
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        --content-padding: 0 8px;
+        
+        & .header>div,
+        & .body>div {
+            padding: var(--content-padding);
+        }
+        
+        & .body {
+            font-size: 14px;
+        }
+    }
 }
